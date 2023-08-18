@@ -29,6 +29,7 @@ export interface Address {
 export interface PostalMail { // postal-mime return type
 	headers: Array<{ key: string, value: string }>;
 	from: Address;
+	replyTo: Address;
 	to: Array<Address>;
 	subject: string;
 	messageId: string;

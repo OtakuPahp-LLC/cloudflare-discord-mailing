@@ -7,7 +7,7 @@ export default async function getChannelId(email: PostalMail, env: Env): Promise
     //   `src/email.ts` by uncommenting the `message.setReject` line.
     //
     // Example: route emails to the partner inbox to a different channel
-    // if(email.to.address === "partner@example.com") return "12345678901234567890";
+    // if(email.to[0].address === "partner@example.com") return "12345678901234567890";
     //
     // Example: one channel per sender, stored in KV (pseudo code)
     // let channelId = await env.KV.get(email.from.address);
@@ -19,5 +19,12 @@ export default async function getChannelId(email: PostalMail, env: Env): Promise
     //
     // Example: drop spam
     // if(email.text.includes("extended warranty")) return null;
-    return env.CHANNEL_ID;
+    //
+    //return env.CHANNEL_ID;
+
+    let channelId = null;
+    if(email.subject.includes("[New task]")) { channelId = "1049705538956562474"; }  // Codeable Prospecting
+    if(email.subject.includes("[New comment]")) { channelId = "1040664628579012608"; } // Codeable Follow-ups
+    if(email.to[0].address === "support@otakupahp.llc") { channelId = "1106248148080414862"; } // Client Support
+    return channelId;
 }
